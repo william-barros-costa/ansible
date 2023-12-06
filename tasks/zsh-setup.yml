@@ -1,0 +1,29 @@
+- name: Install ZSH
+  package:
+    name: zsh
+    state: present # Present ensures the package is installed
+  tags: &tags_for_zsh_tasks
+    - install
+    - productivity
+    - dotfiles
+    - zsh
+
+- name: Install Oh My Zsh
+  git:
+    repo: https://github.com/ohmyzsh/ohmyzsh.git
+    dest: ~/.oh-my-zsh
+    update: yes
+  tags: *tags_for_zsh_tasks
+
+- name: Install Zsh Autosuggestions
+  git:
+    repo: https://github.com/zsh-users/zsh-autosuggestions.git 
+    dest: ~/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+    update: yes
+  tags: *tags_for_zsh_tasks
+
+- name: Change shell to ZSH
+  shell: /bin/zsh
+  tags: *tags_for_zsh_tasks
+
+

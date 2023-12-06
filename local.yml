@@ -1,0 +1,21 @@
+- hosts: localhost
+  pre_tasks:
+    - name: Update Apt
+      become: true
+      apt:
+        force_apt_get: true
+        update_cache: true
+        state: present
+      tags:
+        - install
+        - core
+  tasks:
+    - name: Install Core Utils
+      ansible.builtin.import_tasks:
+        file: tasks/core-setup.yml
+    - name: Install ZSH
+      ansible.builtin.import_tasks:
+        file: tasks/zsh-setup.yml
+    - name: Install Neovim
+      ansible.builtin.import_tasks:
+        file: tasks/nvim-setup.yml
